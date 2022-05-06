@@ -1,0 +1,13 @@
+* {
+  font-family: sans-serif;
+}
+
+div.w3-bar .w3-bar-item {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+input,
+select {
+  margin-bottom: 5px;
+}
