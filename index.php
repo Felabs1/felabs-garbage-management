@@ -1,3 +1,9 @@
+<?php
+
+require "./front_connection.php"
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,16 +24,40 @@
         <div class="w3-row-padding w3-stretch">
             <div class="w3-col m3">
                 <div class="w3-card w3-padding w3-white">
-                    <h6>Recyclable</h6>
-                    <h3>42 kg</h3>
+                    <h6>Amount Collected</h6>
+                    <h3>SH <?php echo
+                            number_format($crud->fetch_data("SELECT SUM(total) AS total FROM payments")[0]["total"], 2);
+                            ?></h3>
                 </div>
             </div>
             <div class="w3-col m3">
                 <div class="w3-card w3-padding w3-white">
-                    <h6>Non Recyclable</h6>
-                    <h3>420 Tonnes</h3>
+                    <h6>Weight Collected</h6>
+                    <h3><?php echo number_format($crud->fetch_data("SELECT SUM(garbage_weight) AS totalWeight FROM payments")[0]["totalWeight"], 0); ?> Kg</h3>
                 </div>
             </div>
+            <div class="w3-col m3">
+                <div class="w3-card w3-padding w3-white">
+                    <h6>Total customers</h6>
+                    <h3><?php echo count($crud->fetch_data("SELECT * FROM customers")); ?></h3>
+                </div>
+            </div>
+            <div class="w3-col m3">
+                <div class="w3-card w3-padding w3-white">
+                    <h6>Amount Disposed</h6>
+                    <h3><?php echo number_format($crud->fetch_data("SELECT SUM(weight) AS totalWeight FROM disposal")[0]["totalWeight"]); ?> Kg</h3>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="w3-row-padding w3-stretch">
+            <div class="w3-col m6">
+                <ul class="w3-ul w3-card">
+                    <li class="w3-light-grey">Frequent Customers</li>
+                    <div style="overflow-y: auto; height: 250px;"></div>
+                </ul>
+            </div>
+
         </div>
     </div>
     <script src="./js/jquery.min.js"></script>

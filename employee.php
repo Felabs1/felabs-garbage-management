@@ -30,8 +30,40 @@
             </select>
             <label for="">Contact</label>
             <input type="text" name="employee_contact" class="w3-input w3-border" id="employee_contact"><br />
-            <button class="w3-button w3-border w3-grey">Confirm Add</button>
+            <button type="button" onclick="addEmployee()" class="w3-button w3-border w3-grey">Confirm Add</button>
         </form>
+    </div>
+    <div class="w3-auto">
+        <table class="w3-table w3-bordered">
+            <tr>
+                <th>#</th>
+                <th>Employee name</th>
+                <th>username</th>
+                <th>usertype</th>
+                <th>contact</th>
+                <th>Action</th>
+            </tr>
+            <tr>
+                <?php
+
+                $fetch = $crud->fetch_data("SELECT * FROM employee");
+                foreach ($fetch as $row) {
+                ?>
+            <tr>
+                <td><?php echo $row['id']; ?></td>
+                <td><?php echo $row['name']; ?></td>
+                <td><?php echo $row['username']; ?></td>
+                <td><?php echo $row['usertype']; ?></td>
+                <td><?php echo $row['contact']; ?></td>
+                <td><button class="w3-button w3-grey w3-round">Edit</button>&nbsp;<button class="w3-button w3-border w3-round">Delete</button></td>
+            </tr>
+        <?php
+                }
+
+
+        ?>
+        </tr>
+        </table>
     </div>
     <script src="./js/jquery.min.js"></script>
     <script src="./js/main.js"></script>

@@ -1,3 +1,9 @@
+<?php
+
+require "./front_connection.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,8 +33,38 @@
             <input type="date" name="disposal_date" class="w3-input w3-border" id="disposal_date">
             <label for="">Assigned Location</label>
             <input type="text" name="disposal_location" class="w3-input w3-border" id="disposal_location">
-            <button class="w3-button w3-border w3-grey">Confirm Add</button>
+            <button type="button" onclick="disposeGarbage()" class="w3-button w3-border w3-grey">Confirm Add</button>
         </form>
+    </div>
+    <div class="w3-auto">
+        <table class="w3-table w3-bordered">
+            <tr>
+                <th>#</th>
+                <th>Disposer Name</th>
+                <th>Disposer_contact</th>
+                <th>Weight</th>
+                <th>Date Disposed</th>
+                <th>Assigned Location</th>
+                <th>Action</th>
+            </tr>
+
+            <?php
+            $fetch = $crud->fetch_data("SELECT * FROM disposal");
+            foreach ($fetch as $row) {
+            ?>
+                <tr>
+                    <td><?php echo $row['id']; ?></td>
+                    <td><?php echo $row['disposer_name']; ?></td>
+                    <td><?php echo $row['disposer_contact']; ?></td>
+                    <td><?php echo $row['weight']; ?></td>
+                    <td><?php echo $row['date_disposed']; ?></td>
+                    <td><?php echo $row['assigned_location']; ?></td>
+                    <td><button class="w3-button w3-grey w3-round">Edit</button><button class="w3-button w3-border w3-round">Delete</button></td>
+                </tr>
+            <?php
+            }
+            ?>
+        </table>
     </div>
     <script src="./js/jquery.min.js"></script>
     <script src="./js/main.js"></script>

@@ -1,3 +1,7 @@
+<?php
+
+require "./front_connection.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,6 +29,31 @@
             <input type="text" name="customer_residence" class="w3-input w3-border" id="customer_residence"><br />
             <button type="button" class="w3-button w3-border w3-grey" onclick="registerCustomer()">Confirm Add</button>
         </form>
+    </div>
+    <div class="w3-auto">
+        <table class="w3-table w3-border w3-round">
+            <?php
+            $fetch = $crud->fetch_data("SELECT * FROM customers");
+            ?>
+            <tr>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Residence</th>
+                <th>Action</th>
+            </tr>
+            <?php
+            foreach ($fetch as $row) {
+            ?>
+                <tr>
+                    <td><?php echo $row['name']; ?></td>
+                    <td><?php echo $row['contact']; ?></td>
+                    <td><?php echo $row['residence']; ?></td>
+                    <td><button class="w3-button w3-grey w3-round">edit</button><button class="w3-button w3-border w3-round">Delete</button></td>
+                </tr>
+            <?php
+            }
+            ?>
+        </table>
     </div>
     <script src="./js/jquery.min.js"></script>
     <script src="./js/main.js"></script>
