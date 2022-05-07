@@ -1,6 +1,12 @@
 <?php
 
 require "./front_connection.php";
+if (!isset($_GET['id'])) {
+    header("location: ./customer.php");
+}
+
+$fetch = $crud->fetch_data("SELECT * FROM customers WHERE id = '" . $_GET['id'] . "'");
+$e_row = $fetch[0];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,12 +28,12 @@ require "./front_connection.php";
         <form action="" id="frmcustomers">
             <h4>New Customer</h4>
             <label for="">Name</label>
-            <input type="text" name="customer_name" class="w3-input w3-border" id="customer_name">
+            <input type="text" value="<?php echo $e_row["name"]; ?>" name="customer_name" class="w3-input w3-border" id="customer_name">
             <label for="">Contact</label>
-            <input type="text" name="customer_contact" class="w3-input w3-border" id="customer_contact">
+            <input type="text" name="customer_contact" value="<?php echo $e_row["contact"]; ?>" class="w3-input w3-border" id="customer_contact">
             <label for="">Residence</label>
-            <input type="text" name="customer_residence" class="w3-input w3-border" id="customer_residence"><br />
-            <button type="button" class="w3-button w3-border w3-grey" onclick="registerCustomer()">Confirm Add</button>
+            <input type="text" name="customer_residence" value="<?php echo $e_row["residence"]; ?>" class="w3-input w3-border" id="customer_residence"><br />
+            <button type="button" class="w3-button w3-border w3-grey" onclick="updateCustomer(<?php echo $e_row['id']; ?>)">Update</button>
         </form>
     </div><br>
     <div class="w3-auto">

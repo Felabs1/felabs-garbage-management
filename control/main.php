@@ -68,3 +68,38 @@ if (isset($_GET['new_disposal'])) {
         echo $crud->conn->error;
     }
 }
+
+if (isset($_GET['update_customer'])) {
+    $update = $crud->update_data("customers", [
+        "name" => $_POST['customer_name'],
+        "contact" => $_POST['customer_contact'],
+        "residence" => $_POST['customer_residence']
+    ], [
+        "id" => $_GET['update_customer']
+    ]);
+
+    if ($update) {
+        echo "success";
+    } else {
+        echo $crud->conn->error;
+    }
+}
+
+if (isset($_GET["edit_employee"])) {
+    $pass_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $update = $crud->update_data("employee", [
+        "name" => $_POST["employee_name"],
+        "username" => $_POST['employee_username'],
+        "password" => $pass_hash,
+        "usertype" => $_POST['employee_usertype'],
+        "contact" => $_POST['employee_contact']
+    ], [
+        "id" => $_GET['edit_employee']
+    ]);
+
+    if ($update) {
+        echo "success";
+    } else {
+        echo $crud->conn->error;
+    }
+}

@@ -137,3 +137,63 @@ const disposeGarbage = () => {
     },
   });
 };
+
+const updateCustomer = (x) => {
+  let name = $("#customer_name");
+  let contact = $("#customer_contact");
+  let residence = $("#customer_residence");
+
+  if (name.val() === "" || contact.val() === "" || residence.val() === "") {
+    alert("please fill in all the data");
+    return;
+  }
+
+  $.ajax({
+    url: "./control/main.php?update_customer=" + x,
+    method: "post",
+    data: $("#frmcustomers").serialize(),
+    success: function (data) {
+      if (data === "success") {
+        alert("customer updated succesfully");
+        window.location.href = "./customer.php";
+      } else {
+        alert("internal server error");
+        console.error(data);
+      }
+    },
+  });
+};
+
+const editEmployee = (x) => {
+  let employeeName = $("#employee_name");
+  let employeeUsername = $("#employee_username");
+  let employeePassword = $("#employee_password");
+  let employeeUsertype = $("#employee_usertype");
+  let employeeContact = $("#employee_contact");
+
+  if (
+    employeeName.val() === "" ||
+    employeeUsername.val() === "" ||
+    employeePassword.val() === "" ||
+    employeeUsertype.val() === "" ||
+    employeeContact.val() === ""
+  ) {
+    alert("please fill in all the forms");
+    return;
+  }
+
+  $.ajax({
+    url: "./control/main.php?edit_employee=" + x,
+    method: "post",
+    data: $("#frmemployees").serialize(),
+    success: function (data) {
+      if (data === "success") {
+        alert("Employee edited succesfully");
+        window.location.href = "./employee.php";
+      } else {
+        alert("internal server error");
+        console.error(data);
+      }
+    },
+  });
+};

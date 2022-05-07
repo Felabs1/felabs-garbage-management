@@ -50,6 +50,7 @@ require "front_connection.php";
             <button type="button" onclick="makePayments()" class="w3-button w3-border w3-grey">Confirm Add</button>
         </form>
     </div>
+    <br>
     <div class="w3-auto">
         <table class="w3-table w3-border w3-round">
             <tr>
@@ -67,9 +68,10 @@ require "front_connection.php";
                 <tr>
                     <td><?php echo $row['id']; ?></td>
                     <td><?php echo $row['cust_id']; ?></td>
-                    <td><?php echo $row['unit_price']; ?></td>
-                    <td><?php echo $row['total']; ?></td>
-                    <td><button class="w3-button w3-grey w3-round">Edit</button><button class="w3-button w3-border w3-round">Delete</button></td>
+                    <td><?php echo number_format($row['garbage_weight'], 2); ?></td>
+                    <td><?php echo number_format($row['unit_price'], 2); ?></td>
+                    <td><?php echo number_format($row['total'], 2); ?></td>
+                    <td><button class="w3-button w3-grey w3-round">Edit</button>&nbsp;<button class="w3-button w3-border w3-round">Delete</button></td>
                 </tr>
             <?php
             }

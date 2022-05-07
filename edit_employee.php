@@ -1,9 +1,14 @@
 <?php
 
 require "./front_connection.php";
+if (!isset($_GET['id'])) {
+    header("location: ./employee.php");
+}
 
-
+$fetch_emp = $crud->fetch_data("SELECT * FROM employee WHERE id = '" . $_GET['id'] . "'");
+$row_emp = $fetch_emp[0];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,22 +29,21 @@ require "./front_connection.php";
         <form action="" id="frmemployees">
             <h4>New Employee</h4>
             <label for="">Name</label>
-            <input type="text" name="employee_name" class="w3-input w3-border" id="employee_name">
+            <input type="text" value="<?php echo $row_emp['name']; ?>" name="employee_name" class="w3-input w3-border" id="employee_name">
             <label for="">Username</label>
-            <input type="text" name="employee_username" class="w3-input w3-border" id="employee_username">
+            <input type="text" value="<?php echo $row_emp['username']; ?>" name="employee_username" class="w3-input w3-border" id="employee_username">
             <label for="">password</label>
-            <input type="text" name="employee_password" class="w3-input w3-border" id="employee_password">
+            <input type="text" value="" name="employee_password" class="w3-input w3-border" id="employee_password">
             <label for="">Usertype</label>
-            <select type="text" name="employee_usertype" class="w3-input w3-border" id="employee_usertype">
+            <select type="text" value="<?php echo $row_emp['usertype']; ?>" name="employee_usertype" class="w3-input w3-border" id="employee_usertype">
                 <option value="admin">Admin</option>
                 <option value="admin">User</option>
             </select>
             <label for="">Contact</label>
-            <input type="text" name="employee_contact" class="w3-input w3-border" id="employee_contact"><br />
-            <button type="button" onclick="addEmployee()" class="w3-button w3-border w3-grey">Confirm Add</button>
+            <input type="text" value="<?php echo $row_emp['contact']; ?>" name="employee_contact" class="w3-input w3-border" id="employee_contact"><br />
+            <button type="button" onclick="editEmployee(<?php echo $row_emp['id']; ?>)" class="w3-button w3-border w3-grey">Confirm Add</button>
         </form>
-    </div>
-    <br>
+    </div><br>
     <div class="w3-auto">
         <table class="w3-table w3-bordered">
             <tr>

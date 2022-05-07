@@ -1,6 +1,9 @@
 <?php
 
 require "./front_connection.php";
+if (!isset($_GET['id'])) {
+    header('location: ./disposal.php');
+}
 
 ?>
 
